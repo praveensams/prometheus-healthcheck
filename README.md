@@ -15,7 +15,6 @@ cat values.yaml
 image:
   repository: <validator>
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
 
