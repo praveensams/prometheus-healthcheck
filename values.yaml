@@ -8,10 +8,10 @@ container:
   port: 9101
 
 image:
-  repository: 759109558351.dkr.ecr.me-south-1.amazonaws.com/rds-exporter
+  repository: <validator>
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "health-9"
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
