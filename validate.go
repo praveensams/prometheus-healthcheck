@@ -18,9 +18,9 @@ func filter( url string , filter string) string {
     re := regexp.MustCompile(filter)
     list := re.FindAllString(newStr,-1)
     if len(list) > 0 {
-        return "unifonic_health{instance=\"" + url + "\"}" + "  1"
+        return "sam_health{instance=\"" + url + "\"}" + "  1"
     } else {
-        return "unifonic_health{instance=\"" + url + "\"}" + "  0"
+        return "sam_health{instance=\"" + url + "\"}" + "  0"
     }
   }
 
@@ -36,7 +36,7 @@ func main() {
 
     scanner := bufio.NewScanner(file)
     for scanner.Scan() {
-        prints=append(prints,filter(scanner.Text(),`^{"status":"UP"`))
+        prints=append(prints,filter(scanner.Text(),`lx=function(){}};google`))
     }
 
     if err := scanner.Err(); err != nil {
