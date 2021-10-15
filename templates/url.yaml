@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: url
+data:
+  url.txt: |
+    {{- range .Values.url }}
+    {{ . }}
+    {{- end  }}
+
+

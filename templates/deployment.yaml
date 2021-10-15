@@ -27,12 +27,20 @@ spec:
       serviceAccountName: {{ include "health-exporter.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      volumes:
+        - name: url
+          configMap:
+            name: url
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - name: url
+              mountPath: /mnt/url.txt
+              subPath: url.txt
           resources:
             requests:
               memory: "3Gi"

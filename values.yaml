@@ -8,10 +8,10 @@ container:
   port: 9101
 
 image:
-  repository: <validator>
+  repository: prometheus-exporter
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: "health-22"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -30,6 +30,10 @@ podAnnotations: {}
 
 podSecurityContext: {}
   # fsGroup: 2000
+
+url:
+  - https://ww.google.com
+  - https://www.yahoo.com
 
 securityContext: {}
   # capabilities:

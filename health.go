@@ -8,19 +8,20 @@ import (
     "regexp"
     "log"
     "net/http"
+    "strings"
 )
 
 func filter( url string , filter string, c chan string ) {
     response, _ := http.Get(url)
     buf := new(bytes.Buffer)
     buf.ReadFrom(response.Body)
-    newStr := buf.String()
+    newStr := strings.ToLower(buf.String())
     re := regexp.MustCompile(filter)
     list := re.FindAllString(newStr,-1)
     if len(list) > 0 {
-        c <- "sam_health{instance=\"" + url + "\"}" + "  1\n"
+        c <- "unifonic_health{instance=\"" + url + "\"}" + "  1\n"
     } else {
-        c <- "sam_health{instance=\"" + url + "\"}" + "  0\n"
+        c <- "unifonic_health{instance=\"" + url + "\"}" + "  0\n"
     }
   }
 
@@ -40,7 +41,7 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 
     scanner := bufio.NewScanner(file)
     for scanner.Scan() {
-        go filter(scanner.Text(),`lx=function(){}};google`,c)
+        go filter(scanner.Text(),`^{"status":(\s+)?"up"`,c)
         fmt.Fprintf(w,<-c)
     }
 
