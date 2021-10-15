@@ -8,7 +8,7 @@ container:
   port: 9101
 
 image:
-  repository: prometheus-exporter
+  repository: exporter
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "health-22"
